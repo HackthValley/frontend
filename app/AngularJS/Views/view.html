@@ -1,0 +1,32 @@
+<h1 class="headings">Alzheimer's Detection</h1>
+<div class="button-wrapper" id = "choice-wrapper">
+  <div>
+<input type="radio" id="draw" name="choice" ng-model="choice" value="draw" ng-change="updateChoice()">
+<label for="draw">Draw</label>
+</div>
+<div>
+<input type="radio" id="upload" name="choice" ng-model="choice" value="upload" ng-change="updateChoice()">
+<label for="upload">Upload</label>
+</div>
+</div>
+<div class = "choice" ng-show = "allowDraw">
+<div>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <div class = "button-wrapper">
+    <button id="save" type="button">Submit</button>
+  </div>
+</div>
+</div>
+<div class = "choice" ng-show = "allowUpload">
+<div id = "uploadClick" ng-click="uploadimg()" ng-show = "allowUploadPrompt">
+  <p>Click here to upload a file</p>
+  <input type="file" accept="image" id="imgupload"  onchange="angular.element(this).scope().SelectFile(event)" hidden/>
+</div>
+
+<div id = "img-wrapper" ng-show="imgupload_src" >
+<img src="" ng-src="{{imgupload_src}}" height="500" width="500"/>
+<div class = "button-wrapper">
+  <button id="submit_uploaded" type="button">Submit</button>
+</div>
+</div>
+</div>
