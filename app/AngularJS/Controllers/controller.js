@@ -1,4 +1,10 @@
 app.controller('mainController', function($scope, $http, $route, $location, BASE) {
+  const predictImage = () => {
+    const endpoint = BASE + "predict";
+    $http.get(endpoint, {withCredentials: false}).then((result) => {
+      console.log(result)
+    }, (err) => console.error(err));
+  }
   $scope.submitUploadedImage = () => {
     const endpoint = BASE + "upload_file";
     if(!$scope.uploadedFile)
@@ -14,20 +20,18 @@ app.controller('mainController', function($scope, $http, $route, $location, BASE
     }).then((data)=>{console.log(data)},(err)=>{console.error(err);});
   }
   const submitDrawnImage = (img) => {
-    const endpoint = BASE + "upload_file";
+    img = img.substring(img.indexOf(',')+1);
+    console.log(img);
+    const endpoint = BASE + "upload_canvas";
     var fd = new FormData();
     fd.append("file",  img);
     $http.post(endpoint, fd, {
       withCredentials: false,
       headers: {'Content-Type': undefined},
       transformRequest: angular.indentity
-    }).then((data)=>{console.log(data)},(err)=>{console.error(err);});
+    }).then((data)=>{predictImage();},(err)=>{console.error(err);});
     };
   const init = () => {
-    const endpoint = BASE + "predict";
-    $http.get(endpoint, {withCredentials: false}).then((result) => {
-      console.log(result)
-    }, (err) => console.error(err));
     const canvas = document.getElementById('canvas');
     const saveButton = document.getElementById('save');
     const drawer = new Drawing(canvas, saveButton);
@@ -69,7 +73,7 @@ app.controller('mainController', function($scope, $http, $route, $location, BASE
     save() {
 
       const data = this.canvas.toDataURL('image/png');
-      //var file = new File([data], "upload.png", {type: "image/png",});
+      //var file = new File([data], "upload.png", {type: "image",});
       submitDrawnImage(data);
     }
     load(event) {
