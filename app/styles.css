@@ -24,6 +24,44 @@ h1{
   color: rgba(203, 209, 209, 0.97);
   letter-spacing: 15px;
 }
+.title-custom{
+  text-align: center;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 36px;
+  margin: 40px 0;
+  color: rgba(203, 209, 209, 0.97);
+  letter-spacing: 15px;
+  animation: fadeIn linear 7s;
+  -webkit-animation: fadeIn linear 7s;
+  -moz-animation: fadeIn linear 7s;
+  -o-animation: fadeIn linear 7s;
+  -ms-animation: fadeIn linear 7s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
 .choice{
   width: 100%;
   display: flex;
@@ -35,7 +73,7 @@ canvas{
   display: block;
   border: 3px solid snow;
 }
-button{
+.submit-buttons{
   width: 100px;
   height: 30px;
   border-radius: 20px;
@@ -73,8 +111,11 @@ button{
   background-color: rgba(93, 77, 84,0.3);
   cursor: pointer;
 }
-img{
+#preview-image{
+  height: 500px;
+  width: 500px;
   display: block;
+  cursor: pointer;
 }
 #img-wrapper{
   width: 500px;
@@ -112,4 +153,11 @@ margin-bottom: 10px;
 }
 #choice-wrapper{
   margin-top: 54px;
+}
+.submit-buttons-white{
+  width: 100px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: rgb(222, 197, 216);
+  color: rgb(55, 51, 49);
 }

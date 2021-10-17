@@ -1,3 +1,4 @@
+<input type="file" accept="image" id="imgupload"  onchange="angular.element(this).scope().SelectFile(event)" hidden/>
 <div class="button-wrapper" id = "choice-wrapper">
   <div>
 <input type="radio" id="draw" name="choice" ng-model="choice" value="draw" ng-change="updateChoice()">
@@ -12,20 +13,62 @@
 <div>
   <canvas id="canvas" width="500" height="500"></canvas>
   <div class = "button-wrapper">
-    <button id="save" type="button">Submit</button>
+    <button class = "submit-buttons" id="save" type="button">Submit</button>
   </div>
 </div>
 </div>
 <div class = "choice" ng-show = "allowUpload">
 <div id = "uploadClick" ng-click="uploadimg()" ng-show = "allowUploadPrompt">
   <p>Click here to upload a file</p>
-  <input type="file" accept="image" id="imgupload"  onchange="angular.element(this).scope().SelectFile(event)" hidden/>
 </div>
 
 <div id = "img-wrapper" ng-show="imgupload_src" >
-<img src="" ng-src="{{imgupload_src}}" height="500" width="500"/>
+<img id = "preview-image" src="" ng-src="{{imgupload_src}}" ng-click = "uploadimg()"/>
 <div class = "button-wrapper">
-  <button id="submit_uploaded" type="button">Submit</button>
+  <button id="submit_uploaded" class = "submit-buttons" type="button" ng-click="submitUploadedImage()">Submit</button>
 </div>
 </div>
 </div>
+<hr>
+<h1 class = "title-custom">Healthy</h1>
+<hr>
+
+<section class="text-gray-600 body-font">
+  <div class="container mx-auto flex px-5 py-28 items-center justify-center flex-col">
+    <div class="text-center lg:w-2/3 w-full">
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">The Science Behind Drawing a Clock</h1>
+      <p class="text-blue-200 py-8 leading-relaxed">Drawing a picture of a clock can reveal many cognitive features including problem solving, visual organization, graphic formulation, spatial planning, long-term memory, short-term memory, etc. You do not need to have artistic abilities. </p>
+      <div class="flex justify-center">
+
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container px-6  mx-auto">
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div>
+        <img class="mx-auto"src="https://img.icons8.com/external-justicon-lineal-color-justicon/150/000000/external-medical-result-telemedicine-justicon-lineal-color-justicon.png"/>
+
+          <h1 class="mt-4  py-3 text-xl font-semibold text-gray-800 dark:text-white">Our Process</h1>
+
+          <p class="mt-2 mx-auto text-blue-200 dark:text-gray-400">We analyze your drawing and create a detailed test result that you can download.</p>
+      </div>
+
+      <div>
+        <img class="mx-auto"src="https://img.icons8.com/external-flatart-icons-lineal-color-flatarticons/150/000000/external-clock-user-interface-flatart-icons-lineal-color-flatarticons.png"/>
+
+          <h1 class="mt-4  py-3 text-xl font-semibold text-gray-800 dark:text-white">Fast & Easy</h1>
+
+          <p class="mt-2 pl-20 mx-auto text-blue-200 dark:text-gray-400">Drawing a clock only a minute of your time.</p>
+      </div>
+
+      <div>
+        <img class="mx-auto" src="https://img.icons8.com/external-photo3ideastudio-lineal-color-photo3ideastudio/150/000000/external-ai-digital-business-photo3ideastudio-lineal-color-photo3ideastudio.png"/>
+          <h1 class="mt-4 py-3 text-xl font-semibold text-gray-800 dark:text-white">Quick Analysis</h1>
+
+          <p class="mt-2 mx-auto text-blue-200 dark:text-gray-400">Get immediate results from our Machine Learning model.</p>
+      </div>
+
+  </div>
+
+<img class="mx-auto py-24" src="./Clockassessment.png"/>

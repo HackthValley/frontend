@@ -1,14 +1,40 @@
-app.controller('mainController', function($scope, $http, $route, $location) {
+app.controller('mainController', function($scope, $http, $route, $location, BASE) {
+  $scope.submitUploadedImage = () => {
+    const endpoint = BASE + "upload_file";
+    if(!$scope.uploadedFile)
+    {
+      return;
+    }
+    var fd = new FormData();
+    fd.append("file", $scope.uploadedFile);
+    $http.post(endpoint, fd, {
+      withCredentials: false,
+      headers: {'Content-Type': undefined},
+      transformRequest: angular.indentity
+    }).then((data)=>{console.log(data)},(err)=>{console.error(err);});
+  }
+  const submitDrawnImage = (img) => {
+    const endpoint = BASE + "upload_file";
+    var fd = new FormData();
+    fd.append("file",  img);
+    $http.post(endpoint, fd, {
+      withCredentials: false,
+      headers: {'Content-Type': undefined},
+      transformRequest: angular.indentity
+    }).then((data)=>{console.log(data)},(err)=>{console.error(err);});
+    };
   const init = () => {
+    const endpoint = BASE + "predict";
+    $http.get(endpoint, {withCredentials: false}).then((result) => {
+      console.log(result)
+    }, (err) => console.error(err));
     const canvas = document.getElementById('canvas');
     const saveButton = document.getElementById('save');
-
     const drawer = new Drawing(canvas, saveButton);
     let base_image = new Image();
     let context = canvas.getContext('2d');
     base_image.src = '../../white.png';
     base_image.onload = () => context.drawImage(base_image, 0, 0);
-
   };
 
   class Drawing {
@@ -41,11 +67,10 @@ app.controller('mainController', function($scope, $http, $route, $location) {
       }
     }
     save() {
+
       const data = this.canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = data;
-      a.download = 'image.png';
-      a.click();
+      //var file = new File([data], "upload.png", {type: "image/png",});
+      submitDrawnImage(data);
     }
     load(event) {
       const file = [...event.target.files].pop();
@@ -73,6 +98,7 @@ app.controller('mainController', function($scope, $http, $route, $location) {
     }
   }
   init();
+  $scope.uploadedFile = null;
   $scope.allowUploadPrompt = true;
   $scope.uploadimg = () => {
   document.getElementById('imgupload').click();
@@ -81,6 +107,7 @@ app.controller('mainController', function($scope, $http, $route, $location) {
   $scope.SelectFile = function (e) {
   $scope.allowUploadPrompt=false;
   $scope.imgupload_src = URL.createObjectURL(e.target.files[0]);
+  $scope.uploadedFile = e.target.files[0];
   $scope.$digest();
   }
   $scope.choice = "";
