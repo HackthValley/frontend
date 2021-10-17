@@ -1,8 +1,17 @@
 app.controller('mainController', function($scope, $http, $route, $location, BASE) {
+  let animationStyle = {
+    animation: "fadeIn linear 4s",
+    "-webkit-animation": "fadeIn linear 4s",
+    "-moz-animation": "fadeIn linear 4s",
+    "-o-animation": "fadeIn linear 4s",
+    "-ms-animation": "fadeIn linear 4s",
+  };
+  $scope.response = "";
   const predictImage = () => {
     const endpoint = BASE + "predict";
     $http.get(endpoint, {withCredentials: false}).then((result) => {
-      console.log(result)
+      $scope.response = result.data;
+      $scope.animatedText = animationStyle;
     }, (err) => console.error(err));
   }
   $scope.submitUploadedImage = () => {
@@ -17,7 +26,7 @@ app.controller('mainController', function($scope, $http, $route, $location, BASE
       withCredentials: false,
       headers: {'Content-Type': undefined},
       transformRequest: angular.indentity
-    }).then((data)=>{console.log(data)},(err)=>{console.error(err);});
+    }).then((data)=>{predictImage();},(err)=>{console.error(err);});
   }
   const submitDrawnImage = (img) => {
     img = img.substring(img.indexOf(',')+1);
@@ -32,6 +41,7 @@ app.controller('mainController', function($scope, $http, $route, $location, BASE
     }).then((data)=>{predictImage();},(err)=>{console.error(err);});
     };
   const init = () => {
+    console.log(animationStyle);
     const canvas = document.getElementById('canvas');
     const saveButton = document.getElementById('save');
     const drawer = new Drawing(canvas, saveButton);
