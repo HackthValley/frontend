@@ -10,7 +10,12 @@ app.controller('mainController', function($scope, $http, $route, $location, BASE
   const predictImage = () => {
     const endpoint = BASE + "predict";
     $http.get(endpoint, {withCredentials: false}).then((result) => {
-      $scope.response = result.data;
+      if(result.data === "UnHealthy"){
+      $scope.response = "high risk";
+      }
+      else {
+      $scope.response = "no risk";
+      }
       $scope.animatedText = animationStyle;
     }, (err) => console.error(err));
   }
